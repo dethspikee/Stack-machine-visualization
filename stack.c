@@ -27,6 +27,7 @@ int main(void) {
   printf("3. Stack is fixed-length (16).\n\n");
 
   do {
+    printf("0. exit\n");
     printf("1. push\n");
     printf("2. pop\n");
     printf("3. display stack\n");
