@@ -6,6 +6,7 @@
 
 void print_stack(void);
 void push(void);
+void add(void);
 int pop(void);
 void stack_underflow(void);
 void stack_overflow(void);
@@ -30,13 +31,15 @@ int main(void) {
     printf("0. exit\n");
     printf("1. push\n");
     printf("2. pop\n");
-    printf("3. display stack\n");
+    printf("3. add\n");
+    printf("4. display stack\n");
     printf("Enter option: ");
     scanf(" %c", &ch);
     if (ch == '0') break;
     if (ch == '1') push();
     if (ch == '2') pop();
-    if (ch == '3') print_stack();
+    if (ch == '3') add();
+    if (ch == '4') print_stack();
     
     while ((ch = getchar()) != '\n')
       if (ch == '0') break;
@@ -85,6 +88,20 @@ int pop(void) {
   print_stack();
 
   return stack[sp];
+}
+
+/*
+ * Pop two top most items; add them together;
+ * and save the result on the stack
+ */
+void add(void) {
+  int val_1 = pop();
+  int val_2 = pop();
+
+  stack[sp] = val_1 + val_2;
+  sp++;
+  if (sp_copy <= sp) sp_copy++;
+  print_stack();
 }
 
 /*
@@ -152,5 +169,8 @@ void print_stack(void) {
   for (int j = 0; j < 6; j++) {
     printf("-");
   }
+  printf("\n");
+  for (int i = 0; i < 50; i++)
+    printf("-");
   printf("\n");
 }
