@@ -32,12 +32,14 @@ int main(void) {
     printf("3. display stack\n");
     printf("Enter option: ");
     scanf(" %c", &ch);
+    if (ch == '0') break;
     if (ch == '1') push();
     if (ch == '2') pop();
     if (ch == '3') print_stack();
     
     while ((ch = getchar()) != '\n')
-      ;
+      if (ch == '0') break;
+
   } while(ch != '0');
 
   return 0;
