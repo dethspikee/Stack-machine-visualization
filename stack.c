@@ -6,7 +6,7 @@
 
 void print_stack(void);
 void push(void);
-void pop();
+void pop(void);
 void stack_underflow(void);
 void stack_overflow(void);
 bool is_empty(void);
