@@ -6,7 +6,7 @@
 
 void print_stack(void);
 void push(void);
-void pop(void);
+int pop(void);
 void stack_underflow(void);
 void stack_overflow(void);
 bool is_empty(void);
@@ -71,18 +71,20 @@ void push(void) {
 /*
  * Pop and return top most element off stack
  */
-void pop(void) {
+int pop(void) {
   if (is_empty()) {
     stack_underflow();
   }
 
+  --sp;
   printf("\n");
-  printf("Popping %d\n", stack[--sp]);
-  printf("Usually this value would be returned and  saved in some other memory segment.\n");
+  printf("Popping %d\n", stack[sp]);
   printf("This value will still 'exist' on the stack until it gets overwritten ");
-  printf("by the next value during 'push' operation.\n\n");
+  printf("by the next value during 'push' operation.\n");
 
   print_stack();
+
+  return stack[sp];
 }
 
 /*
