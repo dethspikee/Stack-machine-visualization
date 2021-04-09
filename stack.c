@@ -35,6 +35,9 @@ int main(void) {
     if (ch == '1') push();
     if (ch == '2') pop();
     if (ch == '3') print_stack();
+    
+    while ((ch = getchar()) != '\n')
+      ;
   } while(ch != '0');
 
   return 0;
