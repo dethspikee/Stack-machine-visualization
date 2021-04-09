@@ -7,15 +7,15 @@
 void print_stack(void);
 void push(void);
 void add(void);
+void sub(void);
 int pop(void);
 void stack_underflow(void);
 void stack_overflow(void);
 bool is_empty(void);
 bool is_full(void);
 
-int stack[STACK_SIZE];
+int stack[STACK_SIZE] = {0};
 int sp = 0;
-int sp_copy = 0;
 
 
 int main(void) {
@@ -25,21 +25,25 @@ int main(void) {
   printf("For simplicity the following rules are enforced:\n");
   printf("1. Only constant values are permitted\n");
   printf("2. Only addition and subtraction operations are permitted\n");
-  printf("3. Stack is fixed-length (16).\n\n");
+  printf("3. Stack is fixed-length (16).\n");
+  printf("4. Each memory location in stack was initialized to 0 ");
+  printf("for better visibility.\n\n");
 
   do {
     printf("0. exit\n");
     printf("1. push\n");
     printf("2. pop\n");
     printf("3. add\n");
-    printf("4. display stack\n");
+    printf("4. sub\n");
+    printf("5. display stack\n");
     printf("Enter option: ");
     scanf(" %c", &ch);
     if (ch == '0') break;
     if (ch == '1') push();
     if (ch == '2') pop();
     if (ch == '3') add();
-    if (ch == '4') print_stack();
+    if (ch == '4') sub();
+    if (ch == '5') print_stack();
     
     while ((ch = getchar()) != '\n')
       if (ch == '0') break;
@@ -65,8 +69,6 @@ void push(void) {
 
   stack[sp] = x;
   sp++;
-
-  if (sp_copy <= sp) sp_copy++;
 
   print_stack();
 }
@@ -100,7 +102,20 @@ void add(void) {
 
   stack[sp] = val_1 + val_2;
   sp++;
-  if (sp_copy <= sp) sp_copy++;
+  print_stack();
+}
+
+/*
+ * Pop two top most items; subtract top most item from
+ * second top most;
+ * and save the result on the stack
+ */
+void sub(void) {
+  int val_1 = pop();
+  int val_2 = pop();
+
+  stack[sp] = val_2 - val_1;
+  sp++;
   print_stack();
 }
 
@@ -143,7 +158,7 @@ void stack_overflow(void) {
 void print_stack(void) {
   printf("\n");
   printf("Stack pointer points at -> %d\n", sp);
-  for (int i = 0; i < sp_copy + 1; i++) {
+  for (int i = 0; i < STACK_SIZE; i++) {
     for (int j = 0; j < 22; j++)
       printf(" ");
     for (int j = 0; j < 6; j++) {
