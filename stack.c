@@ -97,7 +97,7 @@ bool is_full(void) {
 }
 
 /*
- * Check if stack underflow can occur
+ * Handle stack underflow
  */
 void stack_underflow(void) {
   printf("Trying to retrieve item from an empty stack. This would result in ");
@@ -107,7 +107,7 @@ void stack_underflow(void) {
 }
 
 /*
- * Check if stack overflow can occur
+ * Handle stack overflow
  */
 void stack_overflow(void) {
   printf("Next call would exceed stack bound resulting in stack overflow.\n");
