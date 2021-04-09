@@ -7,10 +7,10 @@
 void print_stack(void);
 void push(void);
 void pop();
-bool is_empty(void);
-bool is_full(void);
 void stack_underflow(void);
 void stack_overflow(void);
+bool is_empty(void);
+bool is_full(void);
 
 int stack[STACK_SIZE];
 int sp = 0;
