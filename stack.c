@@ -24,9 +24,10 @@ int main(void) {
   printf("Stack visualization (available memory address shown at the bottom):\n");
   printf("For simplicity the following rules are enforced:\n");
   printf("1. Only constant values are permitted\n");
-  printf("2. Only addition and subtraction operations are permitted\n");
-  printf("3. Stack is fixed-length (16).\n");
-  printf("4. Each memory location in stack was initialized to 0 ");
+  printf("2. User can directly push constants onto the stack: 'push 10' etc.\n");
+  printf("3. Only addition and subtraction operations are permitted\n");
+  printf("4. Stack is fixed-length (16).\n");
+  printf("5. Each memory location in stack was pre-initialized to 0 ");
   printf("for better visibility.\n\n");
 
   do {
