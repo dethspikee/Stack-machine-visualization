@@ -69,7 +69,7 @@ void push(void) {
 }
 
 /*
- * Pop top most element off stack
+ * Pop and return top most element off stack
  */
 void pop(void) {
   if (is_empty()) {
