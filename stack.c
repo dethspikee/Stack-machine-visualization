@@ -15,7 +15,7 @@ bool is_empty(void);
 bool is_full(void);
 
 int stack[STACK_SIZE] = {0};
-int sp = 0;
+int *sp = stack;
 
 
 int main(void) {
@@ -64,12 +64,10 @@ void push(void) {
   }
 
   int x;
-
   printf("Enter constant number to push: ");
   scanf("%d", &x);
 
-  stack[sp] = x;
-  sp++;
+  *sp++ = x;
 
   print_stack();
 }
@@ -82,15 +80,14 @@ int pop(void) {
     stack_underflow();
   }
 
-  --sp;
   printf("\n");
-  printf("Popping %d\n", stack[sp]);
+  printf("Popping %d\n", *--sp);
   printf("This value will still 'exist' on the stack until it gets overwritten ");
   printf("by the next value during 'push' operation.\n");
 
   print_stack();
 
-  return stack[sp];
+  return *sp;
 }
 
 /*
@@ -101,8 +98,7 @@ void add(void) {
   int val_1 = pop();
   int val_2 = pop();
 
-  stack[sp] = val_1 + val_2;
-  sp++;
+  *sp++ = val_1 + val_2;
   print_stack();
 }
 
@@ -115,8 +111,7 @@ void sub(void) {
   int val_1 = pop();
   int val_2 = pop();
 
-  stack[sp] = val_2 - val_1;
-  sp++;
+  *sp++ = val_2 - val_1;
   print_stack();
 }
 
@@ -124,14 +119,14 @@ void sub(void) {
  * Check if stack is empty
  */
 bool is_empty(void) {
-  return sp == 0;
+  return sp == stack;
 }
 
 /*
  * Check if stack is full
  */
 bool is_full(void) {
-  return sp == STACK_SIZE;
+  return sp == &stack[STACK_SIZE];
 }
 
 /*
@@ -157,36 +152,41 @@ void stack_overflow(void) {
  * Print stack to the shell
  */
 void print_stack(void) {
+  int *sp_loop;
+  int i, j;
+
+  for (i = 0; i < 50; i++)
+    printf("-");
   printf("\n");
-  printf("Stack pointer points at -> %d\n", sp);
-  for (int i = 0; i < STACK_SIZE; i++) {
-    for (int j = 0; j < 22; j++)
+  printf("Stack pointer points at next available location\n");
+  for (sp_loop = stack, i = 0; sp_loop < stack + STACK_SIZE; sp_loop++, i++) {
+    for (j = 0; j < 35; j++)
       printf(" ");
-    for (int j = 0; j < 6; j++) {
+    for (j = 0; j < 6; j++) {
       printf("-");
     }
     printf("\n");
-    printf("Memory address: %#3x", i);
-    for (int j = 0; j < 2; j++)
+    printf("Memory address: %p", sp_loop);
+    for (j = 0; j < 4; j++)
       printf(" ");
     printf("|");
-    for (int j = 0; j < 5; j++) {
+    for (j = 0; j < 5; j++) {
       if (j == 2)
         printf("%d", stack[i]);
       else
         printf(" ");
     }
-    if (i == sp)
+    if (sp_loop == sp)
       printf(" <-- stack pointer");
     printf("\n");
   }
-  for (int j = 0; j < 22; j++)
+  for (j = 0; j < 35; j++)
     printf(" ");
-  for (int j = 0; j < 6; j++) {
+  for (j = 0; j < 6; j++) {
     printf("-");
   }
   printf("\n");
-  for (int i = 0; i < 50; i++)
+  for (i = 0; i < 50; i++)
     printf("-");
   printf("\n");
 }
